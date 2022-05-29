@@ -28,7 +28,7 @@ function gameLoop() {
     // window.requestAnimationFrame(draw);
 }
 window.onload = function() {
-    setInterval(gameLoop, 100/60); //10 fpc
+    setInterval(gameLoop, 1000/16); //10 fpc
     // window.requestAnimationFrame(draw);
 };
 
