@@ -16,22 +16,24 @@ const colors = ['#048ABF','#04B2D9','#05DBF2','#05F2F2']
 const bg_color = '#012E40'
 let isRight = true;
 
-var boxes = [[wWidth/2-75,0,151,20,'#111111']];
+var boxes = [[wWidth/2-75,0,170,30,'#048ABF']];
 var level = 0;
 var speed = 2;
 
 var boxX = 1;
-var boxWidth = 150;
-var boxHeight = 20;
+var boxWidth = 170;
+var boxHeight = 30;
 var boxColor = colors[getRandomInt(4)];
 
 
 const times = [];
 let fps;
 function gameLoop() {
-    clearCanvas();
+    let r = 30,
+        g = 30,
+        b = 170-level;
+    clearCanvas('rgb('+r+','+g+','+b+')');
     //main
-    drawRect(boxX,wHeight/2-boxHeight,boxWidth,boxHeight,boxColor);
     if (boxX >= wWidth-boxWidth) {
         isRight = false;
     } 
@@ -43,9 +45,15 @@ function gameLoop() {
     } else {
         boxX=boxX-speed;
     }
-
-    for (let i in boxes) {
-        drawRect(boxes[i][0],wHeight/2+boxes[i][1],boxes[i][2],boxes[i][3],boxes[i][4])
+    
+    drawRect(boxX,wHeight/2-boxHeight,boxWidth,boxHeight,boxColor);
+    for (let i=0;i<boxes.length;i++) {
+        randShift = getRandomInt(10+i);
+        randAndgle = (boxes.length-i);
+        if (i == boxes.length-1) {
+            randAndgle = 0;
+        }
+        drawRect(boxes[i][0],wHeight/2+boxes[i][1],boxes[i][2],boxes[i][3],boxes[i][4],angle=randAndgle)
     }
     //main end
     //fps
@@ -79,7 +87,7 @@ function tapped() {
     let now2 = now1 + boxWidth;
     let last1 = boxes.at(-1)[0];
     let last2 = last1 + boxes.at(-1)[2];
-    console.log(now1,now2,last1,last2);
+    console.log(boxes.length);
     if (now1 < last1) {
         if (now2 < last1) {
             game = false;
@@ -92,7 +100,6 @@ function tapped() {
         } 
         now2 = last2;
     }
-    console.log(now1,now2,last1,last2);
     boxes.push([now1,0,now2-now1,boxHeight,boxColor]);
     boxWidth = now2-now1;
     boxColor = colors[getRandomInt(4)];
@@ -118,6 +125,9 @@ function shiftBoxes(arr) {
     for (let i=0; i<arr.length;i++) {
         newarr.push([arr[i][0],arr[i][1]+boxHeight,arr[i][2],arr[i][3],arr[i][4]]);
     }
+    if (newarr.length > 15) {
+        newarr.shift();
+    }
     return newarr;
 }
 function handleStart(evt) {
@@ -127,18 +137,23 @@ function handleStart(evt) {
     // var touches = evt.changedTouches;
     // console.log(touches[0].clientX, touches[0].clientY)
 }
-function clearCanvas() {
+function clearCanvas(color='#122459') {
     ctx.beginPath();
-    ctx.fillStyle = '#122459';
+    ctx.fillStyle = color;
     ctx.fillRect(0, 0, wWidth, wHeight );
     ctx.closePath();
 }
-function drawRect(x1,y1,x2,y2,color='white') {
+function drawRect(x1,y1,x2,y2,color='white',angle=0) {
     ctx.beginPath();
     ctx.fillStyle = color;
     ctx.shadowColor = color;
-    ctx.shadowBlur = 10;
+    ctx.shadowBlur = 7;
+    ctx.rotate(angle * Math.PI / 180);
     ctx.fillRect(x1,y1,x2,y2);
+    ctx.strokeStyle= 'white';
+    ctx.lineWidth = 0.3;
+    ctx.strokeRect(x1,y1,x2,y2);
+    ctx.rotate(-angle * Math.PI / 180);
     ctx.closePath();
 }
 function drawLine(x1,y1,x2,y2,color='white') {
