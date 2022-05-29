@@ -48,12 +48,14 @@ function gameLoop() {
     
     drawRect(boxX,wHeight/2-boxHeight,boxWidth,boxHeight,boxColor);
     for (let i=0;i<boxes.length;i++) {
-        randShift = getRandomInt(10+i);
-        randAndgle = (boxes.length-i);
-        if (i == boxes.length-1) {
-            randAndgle = 0;
+        num = i*20;
+        opacity = num.toString(16);
+        if (opacity.length < 2) {
+            opacity = '0'+opacity;
         }
-        drawRect(boxes[i][0],wHeight/2+boxes[i][1],boxes[i][2],boxes[i][3],boxes[i][4],angle=randAndgle)
+        opacity = '00';
+        // console.log(i,boxes[i][0])
+        drawRect(boxes[i][0],wHeight/2+boxes[i][1],boxes[i][2],boxes[i][3],boxes[i][4])
     }
     //main end
     //fps
