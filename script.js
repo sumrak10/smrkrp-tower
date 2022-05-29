@@ -25,11 +25,11 @@ function gameLoop() {
     } else {
         i--;
     }
-    // window.requestAnimationFrame(draw);
+    window.requestAnimationFrame(gameLoop);
 }
 window.onload = function() {
-    setInterval(gameLoop, 1000/16); //10 fpc
-    // window.requestAnimationFrame(draw);
+    // setInterval(gameLoop, 1000/16); //10 fpc
+    window.requestAnimationFrame(gameLoop);
 };
 
 
