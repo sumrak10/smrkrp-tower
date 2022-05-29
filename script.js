@@ -11,6 +11,8 @@ cvs.height = wHeight;
 
 var isRight = true;
 var i = 1;
+const times = [];
+let fps;
 function gameLoop() {
     clearCanvas();
     drawRect(i,100,100,100,'white');
@@ -25,10 +27,20 @@ function gameLoop() {
     } else {
         i--;
     }
+
+    const now = performance.now();
+    while (times.length > 0 && times[0] <= now - 1000) {
+      times.shift();
+    }
+    times.push(now);
+    fps = times.length;
+    ctx.fillStyle = "white";
+    ctx.font = "Regular 15pt Arial";
+    ctx.fillText(fps, 5, 10);
     window.requestAnimationFrame(gameLoop);
 }
 window.onload = function() {
-    // setInterval(gameLoop, 1000/16); //10 fpc
+    // setInterval(gameLoop, 1000/10); //10 fpc
     window.requestAnimationFrame(gameLoop);
 };
 
