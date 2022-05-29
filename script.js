@@ -101,7 +101,7 @@ function tapped() {
         boxX = 1;
         isRight = false;
     } else {
-        boxX = wHeight-boxWidth-10;
+        boxX = wWidth-boxWidth;
         isRight = true;
     }
 }
@@ -136,6 +136,8 @@ function clearCanvas() {
 function drawRect(x1,y1,x2,y2,color='white') {
     ctx.beginPath();
     ctx.fillStyle = color;
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 10;
     ctx.fillRect(x1,y1,x2,y2);
     ctx.closePath();
 }
