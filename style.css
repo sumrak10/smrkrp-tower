@@ -7,3 +7,8 @@ body {
 #canvas {
     display: block;
 }
+
+@font-face {
+    font-family: RobotoRegular;
+    src: url('fonts/Roboto/RobotoCondensed-Regular.ttf');
+}
