@@ -22,6 +22,9 @@ var game = false,
 const colors = ['#048ABF','#04B2D9','#05DBF2','#05F2F2']
 const bg_color = [10,10,100]
 if (tg.ready()) {
+    bg_color = tg.ThemeParams.bg_color;
+}
+if (tg.ready()) {
     colors = [tg.ThemeParams.bg_color,
             tg.ThemeParams.text_color,
             tg.ThemeParams.hint_color,
