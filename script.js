@@ -1,5 +1,5 @@
 var tg = window.Telegram.WebApp;
-tg.expand()
+tg.expand();
 var
     cvs     = document.getElementById('canvas'),
     ctx     = cvs.getContext('2d'),
@@ -8,6 +8,9 @@ var
 
 cvs.width = wWidth;
 cvs.height = wHeight;
+
+var audio = new Audio();
+audio.src = 'sounds/tapped.mp3';
 
 var game = false,
     gameover = false,
@@ -18,6 +21,14 @@ var game = false,
 // const bg_color = '#122459'
 const colors = ['#048ABF','#04B2D9','#05DBF2','#05F2F2']
 const bg_color = [10,10,100]
+if (tg.ready()) {
+    colors = [tg.ThemeParams.bg_color,
+            tg.ThemeParams.text_color,
+            tg.ThemeParams.hint_color,
+            tg.ThemeParams.link_color,
+            tg.ThemeParams.button_color,
+            tg.ThemeParams.button_text_colorString]
+}
 let isRight = true;
 
 var boxes = [[wWidth/2-100,0,200,30,'#048ABF','Старт']];
@@ -37,6 +48,7 @@ let r = bg_color[0],
 const times = [];
 let fps;
 function gameLoop() {
+    console.log(tg.ready());
     clearCanvas('rgb('+r+','+g+','+b+')');
     if (game && !restart) {
         //main
@@ -74,13 +86,14 @@ function gameLoop() {
         }
         if (!gameover) {
             drawRect(boxX,wHeight/2-boxHeight,boxWidth,boxHeight,boxColor,'',gameShadowBlur);
+
             if ((clippedBoxColor[0] >= bg_color[0]) || (clippedBoxColor[1] >= bg_color[1]) || (clippedBoxColor[2] >= bg_color[2])) {
                 drawRect(clippedBox[0],wHeight/2-clippedBox[1],clippedBox[2],clippedBox[3],'rgb('+clippedBoxColor[0]+','+clippedBoxColor[1]+','+clippedBoxColor[2]+')','',0,'rgb('+clippedBoxColor[0]+','+clippedBoxColor[1]+','+clippedBoxColor[2]+')');
             }
         }
         for (let i=0;i<boxes.length;i++) {
             if (!gameover) {
-                drawRect(boxes[i][0],wHeight/2+boxes[i][1],boxes[i][2],boxes[i][3],boxes[i][4],boxes[i][5]);
+                drawRect(boxes[i][0],wHeight/2+boxes[i][1],boxes[i][2],boxes[i][3],boxes[i][4],boxes[i][5],gameOverShadowBlur);
             } else {
                 drawRect(boxes[i][0],wHeight/2+boxes[i][1],boxes[i][2],boxes[i][3],boxes[i][4],boxes[i][5],gameOverShadowBlur);
             }
@@ -113,15 +126,18 @@ function gameLoop() {
         }
         if (b <= bg_color[2]) {
             b = b + 5;
-        } 
-        
-        // else {
-            ctx.fillStyle = "white";
-            ctx.font = "50px RobotoRegular";
-            ctx.textAlign = 'center'
-            ctx.fillText('Счет: '+(level-1), wWidth/2,wHeight/2-50);
-            drawStartButton(wWidth/2-100,wHeight/2,200,30,'#048ABF', 'Рестарт');
-        // }
+        }
+        ctx.fillStyle = "white";
+        ctx.font = "50px RobotoRegular";
+        ctx.textAlign = 'center'
+        ctx.fillText('Счет: '+(level-1), wWidth/2,wHeight/2-50);
+        drawStartButton(wWidth/2-100,wHeight/2,200,30,'#048ABF', 'Рестарт');
+        if (tg.ready()) {
+            tg.MainButton.text = 'Готово'ж
+            tg.MainButton.color = colors[0];
+            tg.MainButton.textColor = '#ffffff';
+            tg.MainButton.show();
+        }
     }
     //fps
     const now = performance.now();
@@ -165,10 +181,11 @@ function tapped() {
         now2 = last2;
     }
     if (!gameover) {
-        r = 200;
-        g = 200;
-        b = 200;
-        gameShadowBlur = 50;
+        audio.play();
+        r = 150;
+        g = 150;
+        b = 150;
+        gameShadowBlur = 60;
         clippedBoxColor = [255,255,255];
         boxes.push([now1,0,now2-now1,boxHeight,boxColor,level]);
     } else {
