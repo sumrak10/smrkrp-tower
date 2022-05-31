@@ -1,5 +1,4 @@
-var tg = window.Telegram.WebApp,
-    tg  = Telegram.WebApp;
+var tg = window.Telegram.WebApp;
 tg.expand();
 var
     cvs     = document.getElementById('canvas'),
