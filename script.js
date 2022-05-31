@@ -130,13 +130,14 @@ function gameLoop() {
         ctx.fillStyle = "white";
         ctx.font = "50px RobotoRegular";
         ctx.textAlign = 'center'
-        ctx.fillText('Счет: '+(level-1), wWidth/2,wHeight/2-50);
+        // ctx.fillText('Счет: '+(level-1), wWidth/2,wHeight/2-50);
         if (wtg.ready()) {
             drawStartButton(wWidth/2-100,wHeight/2,200,30,'#048ABF', 'Рестарт');
             wtg.MainButton.text = 'Готово';
             wtg.MainButton.color = colors[0];
             wtg.MainButton.textColor = '#ffffff';
             wtg.MainButton.show();
+            ctx.fillText('гл.кнопка '+(level-1), wWidth/2,wHeight/2-50);
         }
     }
     //fps
