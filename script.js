@@ -133,7 +133,7 @@ function gameLoop() {
         ctx.fillText('Счет: '+(level-1), wWidth/2,wHeight/2-50);
         drawStartButton(wWidth/2-100,wHeight/2,200,30,'#048ABF', 'Рестарт');
         if (tg.ready()) {
-            tg.MainButton.text = 'Готово'ж
+            tg.MainButton.text = 'Готово';
             tg.MainButton.color = colors[0];
             tg.MainButton.textColor = '#ffffff';
             tg.MainButton.show();
