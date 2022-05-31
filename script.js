@@ -21,9 +21,7 @@ var game = false,
 // const bg_color = '#122459'
 const colors = ['#048ABF','#04B2D9','#05DBF2','#05F2F2']
 const bg_color = [10,10,100]
-if (tg.ready()) {
-    bg_color = tg.ThemeParams.bg_color;
-}
+bg_color = tg.ThemeParams.bg_color;
 if (tg.ready()) {
     colors = [tg.ThemeParams.bg_color,
             tg.ThemeParams.text_color,
@@ -133,14 +131,11 @@ function gameLoop() {
         ctx.font = "50px RobotoRegular";
         ctx.textAlign = 'center'
         ctx.fillText('Счет: '+(level-1), wWidth/2,wHeight/2-50);
-        ctx.fillText('гл.кнопка '+tg.ready(), wWidth/2,wHeight/2-50);
-        if (tg.ready()) {
-            drawStartButton(wWidth/2-100,wHeight/2,200,30,'#048ABF', 'Рестарт');
-            tg.MainButton.text = 'Готово';
-            tg.MainButton.color = colors[0];
-            tg.MainButton.textColor = '#ffffff';
-            tg.MainButton.show();
-        }
+        drawStartButton(wWidth/2-100,wHeight/2,200,30,'#048ABF', 'Рестарт');
+        tg.MainButton.text = 'Готово';
+        tg.MainButton.color = colors[0];
+        tg.MainButton.textColor = '#ffffff';
+        tg.MainButton.show();
     }
     //fps
     const now = performance.now();
@@ -159,7 +154,12 @@ window.onload = function() {
     console.log('v1.0');
     cvs.addEventListener("touchstart", handleStart, false);
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
-        tg.sendData("level: " + level);
+        tg.sendData("level: " + level+' '+tg.ThemeParams.bg_color+
+        tg.ThemeParams.text_color+
+        tg.ThemeParams.hint_color+
+        tg.ThemeParams.link_color+
+        tg.ThemeParams.button_color+
+        tg.ThemeParams.button_text_colorString);
     });
     
     window.requestAnimationFrame(gameLoop);
