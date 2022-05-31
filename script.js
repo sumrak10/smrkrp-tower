@@ -48,7 +48,6 @@ let r = bg_color[0],
 const times = [];
 let fps;
 function gameLoop() {
-    console.log(tg.ready());
     clearCanvas('rgb('+r+','+g+','+b+')');
     if (game && !restart) {
         //main
@@ -132,12 +131,12 @@ function gameLoop() {
         ctx.textAlign = 'center'
         ctx.fillText('Счет: '+(level-1), wWidth/2,wHeight/2-50);
         drawStartButton(wWidth/2-100,wHeight/2,200,30,'#048ABF', 'Рестарт');
-        if (tg.ready()) {
-            tg.MainButton.text = 'Готово';
-            tg.MainButton.color = colors[0];
-            tg.MainButton.textColor = '#ffffff';
-            tg.MainButton.show();
-        }
+        // if (tg.ready()) {
+        //     tg.MainButton.text = 'Готово';
+        //     tg.MainButton.color = colors[0];
+        //     tg.MainButton.textColor = '#ffffff';
+        //     tg.MainButton.show();
+        // }
     }
     //fps
     const now = performance.now();
