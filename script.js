@@ -152,6 +152,7 @@ function gameLoop() {
     window.requestAnimationFrame(gameLoop);
 }
 window.onload = function() {
+    console.log('v1.0')
     cvs.addEventListener("touchstart", handleStart, false);
     // setInterval(gameLoop, 1000/10); //10 fpc
     window.requestAnimationFrame(gameLoop);
