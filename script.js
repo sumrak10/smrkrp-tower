@@ -22,20 +22,18 @@ var game = false,
 const colors = ['#048ABF','#04B2D9','#05DBF2','#05F2F2']
 const bg_color = [10,10,100]
 // bg_color = tg.ThemeParams.bg_color;
-if (tg.ready()) {
-    colors = [tg.ThemeParams.bg_color,
-            tg.ThemeParams.text_color,
-            tg.ThemeParams.hint_color,
-            tg.ThemeParams.link_color,
-            tg.ThemeParams.button_color,
-            tg.ThemeParams.button_text_colorString]
-}
-let isRight = true;
+// colors = [tg.ThemeParams.bg_color,
+//         tg.ThemeParams.text_color,
+//         tg.ThemeParams.hint_color,
+//         tg.ThemeParams.link_color,
+//         tg.ThemeParams.button_color,
+//         tg.ThemeParams.button_text_colorString]
+
 
 var boxes = [[wWidth/2-100,0,200,30,'#048ABF','Старт']];
 var level = 0;
 var speed = 2;
-
+let isRight = true;
 var boxWidth = 200;
 var boxHeight = 30;
 var boxX = -boxWidth;
@@ -154,6 +152,11 @@ window.onload = function() {
     console.log('v1.0');
     cvs.addEventListener("touchstart", handleStart, false);
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
+        tg.MainButton.text = 'Нажато';
+        ctx.fillStyle = "white";
+        ctx.font = "50px RobotoRegular";
+        ctx.textAlign = 'center'
+        ctx.fillText('Main btn clicked ', wWidth/2,wHeight/2-50);
         tg.sendData("level: " + level+' '+tg.ThemeParams.bg_color+
         tg.ThemeParams.text_color+
         tg.ThemeParams.hint_color+
