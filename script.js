@@ -160,12 +160,7 @@ window.onload = function() {
         ctx.font = "50px RobotoRegular";
         ctx.textAlign = 'center'
         ctx.fillText('Main btn clicked ', wWidth/2,wHeight/2-50);
-        tg.sendData("level: " + level+' '+tg.ThemeParams.bg_color+
-        tg.ThemeParams.text_color+
-        tg.ThemeParams.hint_color+
-        tg.ThemeParams.link_color+
-        tg.ThemeParams.button_color+
-        tg.ThemeParams.button_text_colorString);
+        tg.sendData("level: " + level);
     });
     
     window.requestAnimationFrame(gameLoop);
