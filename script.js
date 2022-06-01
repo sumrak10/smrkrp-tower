@@ -38,6 +38,7 @@ const bg_color = [10,10,50]
 
 var boxes = [[wWidth/2-100,0,200,30,'#048ABF','Старт']];
 var level = 0;
+var maxlevel = 0;
 var speed = 2;
 let isRight = true;
 var boxWidth = 200;
@@ -136,6 +137,10 @@ function gameLoop() {
         ctx.textAlign = 'center'
         ctx.fillText('Счет: '+(level-1), wWidth/2,wHeight/2-50);
         drawStartButton(wWidth/2-100,wHeight/2,200,30,'#048ABF', 'Рестарт');
+        if (level > maxlevel) {
+            maxlevel = level;
+        }
+        tg.MainButton.disable();
     }
     //fps
     const now = performance.now();
@@ -251,6 +256,7 @@ function handleStart(evt) {
         game = true;
 
         clippedBox = [];
+        tg.MainButton.enable();
     }
     
     // console.log("touchstart.");
