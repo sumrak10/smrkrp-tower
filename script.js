@@ -1,9 +1,10 @@
 var tg = window.Telegram.WebApp;
 tg.expand();
 tg.MainButton.text = 'Обновить рекорд!';
-tg.MainButton.color = '#04B2D9';
+tg.MainButton.color = '#005f73'; 
 tg.MainButton.textColor = '#ffffff';
 tg.MainButton.show();
+tg.MainButton.disable();
 var
     cvs     = document.getElementById('canvas'),
     ctx     = cvs.getContext('2d'),
@@ -141,6 +142,7 @@ function gameLoop() {
             maxlevel = level;
         }
         tg.MainButton.disable();
+        tg.MainButton.color = '#005f73';
     }
     //fps
     const now = performance.now();
@@ -257,6 +259,7 @@ function handleStart(evt) {
 
         clippedBox = [];
         tg.MainButton.enable();
+        tg.MainButton.color = '#04B2D9';
     }
     
     // console.log("touchstart.");
