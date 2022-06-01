@@ -17,6 +17,9 @@ var game = false,
     restart = false,
     gameOverShadowBlur = 15,
     gameShadowBlur = 15;
+
+
+var MainButtonText = 'Готово';
 // const colors = ['#2F2ABF','#F2BE22','#F23005','#D9D9D9']
 // const bg_color = '#122459'
 const colors = ['#048ABF','#04B2D9','#05DBF2','#05F2F2']
@@ -130,7 +133,7 @@ function gameLoop() {
         ctx.textAlign = 'center'
         ctx.fillText('Счет: '+(level-1), wWidth/2,wHeight/2-50);
         drawStartButton(wWidth/2-100,wHeight/2,200,30,'#048ABF', 'Рестарт');
-        tg.MainButton.text = 'Готово';
+        tg.MainButton.text = MainButtonText;
         tg.MainButton.color = colors[0];
         tg.MainButton.textColor = '#ffffff';
         tg.MainButton.show();
@@ -152,7 +155,7 @@ window.onload = function() {
     console.log('v1.0');
     cvs.addEventListener("touchstart", handleStart, false);
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
-        tg.MainButton.text = 'Нажато';
+        MainButtonText = 'Нажато';
         ctx.fillStyle = "white";
         ctx.font = "50px RobotoRegular";
         ctx.textAlign = 'center'
