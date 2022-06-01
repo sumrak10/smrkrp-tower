@@ -21,7 +21,7 @@ var game = false,
 // const bg_color = '#122459'
 const colors = ['#048ABF','#04B2D9','#05DBF2','#05F2F2']
 const bg_color = [10,10,100]
-bg_color = tg.ThemeParams.bg_color;
+// bg_color = tg.ThemeParams.bg_color;
 if (tg.ready()) {
     colors = [tg.ThemeParams.bg_color,
             tg.ThemeParams.text_color,
