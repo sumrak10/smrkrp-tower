@@ -1,10 +1,4 @@
 var tg = window.Telegram.WebApp;
-tg.expand();
-tg.MainButton.text = 'Обновить рекорд!';
-tg.MainButton.color = '#005f73'; 
-tg.MainButton.textColor = '#ffffff';
-tg.MainButton.show();
-tg.MainButton.disable();
 var
     cvs     = document.getElementById('canvas'),
     ctx     = cvs.getContext('2d'),
@@ -28,6 +22,14 @@ var game = false,
 // const bg_color = '#122459'
 const colors = ['#048ABF','#04B2D9','#05DBF2','#05F2F2']
 const bg_color = [10,10,50]
+
+
+tg.expand();
+tg.MainButton.text = '';
+tg.MainButton.color = '#0a0a32'; 
+tg.MainButton.textColor = '#ffffff';
+tg.MainButton.show();
+tg.MainButton.disable();
 // bg_color = tg.ThemeParams.bg_color;
 // colors = [tg.ThemeParams.bg_color,
 //         tg.ThemeParams.text_color,
@@ -141,8 +143,6 @@ function gameLoop() {
         if (level > maxlevel) {
             maxlevel = level;
         }
-        tg.MainButton.disable();
-        tg.MainButton.color = '#005f73';
     }
     //fps
     const now = performance.now();
@@ -199,7 +199,10 @@ function tapped() {
         boxes.push([now1,0,now2-now1,boxHeight,boxColor,level]);
     } else {
         boxes = shiftBoxes(boxes,true);
-        lastbox = [boxX,-boxHeight,boxWidth,boxHeight,boxColor]
+        lastbox = [boxX,-boxHeight,boxWidth,boxHeight,boxColor];
+        tg.MainButton.enable();
+        tg.MainButton.text = 'Обновить рекорд';
+        tg.MainButton.color = '#04B2D9';
     }
     boxWidth = now2-now1;
     boxColor = colors[getRandomInt(4)];
@@ -258,8 +261,10 @@ function handleStart(evt) {
         game = true;
 
         clippedBox = [];
-        tg.MainButton.enable();
-        tg.MainButton.color = '#04B2D9';
+        
+        tg.MainButton.disable();
+        tg.MainButton.text = '';
+        tg.MainButton.color = '#048ABF';
     }
     
     // console.log("touchstart.");
