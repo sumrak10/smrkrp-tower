@@ -25,7 +25,7 @@ const bg_color = [10,10,50]
 
 
 tg.expand();
-tg.MainButton.text = '';
+tg.MainButton.text = 'Нельзя обновить во время игры';
 tg.MainButton.color = '#0a0a32'; 
 tg.MainButton.textColor = '#ffffff';
 tg.MainButton.show();
